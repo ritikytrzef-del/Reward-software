@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import Layout from './components/Layout';
 import Home from './pages/Home';
+import SocialPage from './pages/SocialPage';
 import VideoPage from './pages/VideoPage';
 import AdminPanel from './pages/AdminPanel';
 import { telegram } from './services/telegram';
@@ -26,7 +27,6 @@ const App: React.FC = () => {
       if (user?.id === ADMIN_ID) {
         return <AdminPanel onBack={() => setActiveTab('home')} />;
       } else {
-        // Fallback if somehow they trigger this state
         return <Home onAdminClick={handleAdminAccess} />;
       }
     }
@@ -34,6 +34,8 @@ const App: React.FC = () => {
     switch (activeTab) {
       case 'home':
         return <Home onAdminClick={handleAdminAccess} />;
+      case 'social':
+        return <SocialPage />;
       case 'video':
         return <VideoPage />;
       default:
