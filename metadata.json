@@ -1,0 +1,8 @@
+{
+  "name": "Reward Software - Telegram Mini App",
+  "description": "An official reward platform frontend for Telegram, featuring Tap2Earn, Ad watching, Quizzes, and withdrawal management with a premium white and blue aesthetic.",
+  "requestFramePermissions": [
+    "camera",
+    "geolocation"
+  ]
+}
