@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Reward Software Premium</title>
+    
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        :root {
+            --primary: #6C5CE7;
+            --secondary: #a29bfe;
+            --bg-color: #F8F9FD;
+            --card-bg: #ffffff;
+            --text-main: #2d3436;
+            --text-sub: #636e72;
+            --success: #00b894;
+            --hot: #ff7675;
+            --shadow: 0 10px 30px -10px rgba(108, 92, 231, 0.15);
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            padding-bottom: 80px;
+        }
+
+        .header-container {
+            background: linear-gradient(135deg, #6C5CE7, #a29bfe);
+            padding: 20px 20px 30px;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            color: white;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(108, 92, 231, 0.3);
+            margin-bottom: -20px;
+            z-index: 10;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .user-info h2 { font-size: 22px; margin: 0; font-weight: 700; }
+        .user-info p { margin: 0; opacity: 0.9; font-size: 13px; }
+
+        .status-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .search-box {
+            background: white;
+            border-radius: 20px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            margin: 0 auto;
+        }
+        .search-box i { color: var(--primary); font-size: 20px; }
+        .search-box input { border: none; outline: none; width: 100%; font-family: 'Poppins'; font-size: 15px; }
+
+        .section-title { padding: 0 20px; margin-top: 40px; font-size: 18px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+
+        .featured-scroll { display: flex; overflow-x: auto; padding: 15px 20px; gap: 15px; scrollbar-width: none; }
+        .featured-scroll::-webkit-scrollbar { display: none; }
+
+        .feat-card { min-width: 260px; background: white; border-radius: 20px; padding: 15px; display: flex; align-items: center; gap: 15px; box-shadow: var(--shadow); position: relative; overflow: hidden; }
+        .feat-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: var(--primary); }
+        .feat-icon { width: 50px; height: 50px; border-radius: 12px; }
+
+        .app-grid { padding: 10px 20px; display: grid; gap: 15px; }
+        .app-item { background: white; border-radius: 20px; padding: 18px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid rgba(108, 92, 231, 0.08); }
+
+        .app-top { display: flex; align-items: center; gap: 15px; }
+        .app-img { width: 55px; height: 55px; border-radius: 14px; object-fit: cover; border: 2px solid #f0f0f0; }
+        .app-details { flex: 1; }
+        .app-title { font-weight: 700; font-size: 15px; display: flex; align-items: center; gap: 5px; }
+        .app-sub { font-size: 12px; color: var(--text-sub); }
+
+        /* Start Earn Button Style */
+        .start-earn-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-family: 'Poppins';
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        /* Payment Section Styles */
+        .payment-card { background: white; margin: 10px 20px; padding: 15px; border-radius: 20px; box-shadow: var(--shadow); }
+        .pay-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f8f8f8; }
+        .pay-row:last-child { border: none; }
+        .pay-name { font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 8px; }
+        .pay-min { font-size: 13px; font-weight: 700; color: var(--success); }
+
+        /* Proof Section Styles */
+        .proof-scroll { display: flex; overflow-x: auto; gap: 10px; padding: 10px 20px; scrollbar-width: none; }
+        .proof-scroll::-webkit-scrollbar { display: none; }
+        .proof-item { min-width: 140px; background: #E3FCEF; padding: 10px; border-radius: 15px; border: 1px solid #bee3d0; }
+        .proof-user { font-size: 11px; font-weight: 700; color: #2d3436; }
+        .proof-amt { font-size: 12px; color: #008a6e; font-weight: 800; }
+
+        .footer-note { text-align: center; font-size: 11px; color: #b2bec3; margin-top: 30px; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-in { animation: fadeIn 0.4s ease forwards; }
+
+    </style>
+</head>
+<body>
+
+    <div class="header-container">
+        <div class="user-profile">
+            <div class="user-info">
+                <h2>Reward Software</h2>
+                <p>Start Earning Today 🚀</p>
+            </div>
+            <div class="status-badge">
+                <i class="ph-fill ph-shield-check"></i> Verified
+            </div>
+        </div>
+        <div class="search-box">
+            <i class="ph ph-magnifying-glass"></i>
+            <input type="text" id="searchInput" placeholder="Search official bots...">
+        </div>
+    </div>
+
+    <div class="section-title">
+        <i class="ph-fill ph-fire" style="color: var(--hot);"></i> Trending Now
+    </div>
+    <div class="featured-scroll" id="featuredGrid"></div>
+
+    <div class="section-title">
+        <i class="ph-fill ph-wallet" style="color: var(--success);"></i> Payment Methods
+    </div>
+    <div class="payment-card">
+        <div class="pay-row">
+            <div class="pay-name"><i class="ph-bold ph-wallet"></i> FaucetPay</div>
+            <div class="pay-min">Min: $2.00</div>
+        </div>
+        <div class="pay-row">
+            <div class="pay-name"><i class="ph-bold ph-google-play-logo"></i> Google Play</div>
+            <div class="pay-min">Min: ₹100</div>
+        </div>
+        <div class="pay-row">
+            <div class="pay-name"><i class="ph-bold ph-currency-circle-dollar"></i> USDT (TON)</div>
+            <div class="pay-min">Min: $2.00</div>
+        </div>
+    </div>
+
+    <div class="section-title">
+        <i class="ph-fill ph-squares-four"></i> Official Bots
+    </div>
+    <div class="app-grid" id="mainGrid"></div>
+
+    <div class="section-title">
+        <i class="ph-fill ph-seal-check" style="color: var(--success);"></i> Latest Proofs
+    </div>
+    <div class="proof-scroll">
+        <div class="proof-item"><div class="proof-user">@Rahul_K</div><div class="proof-amt">₹100 Play</div></div>
+        <div class="proof-item"><div class="proof-user">@Crypto_J</div><div class="proof-amt">$2.10 FPay</div></div>
+        <div class="proof-item"><div class="proof-user">@Ankit_01</div><div class="proof-amt">$2.00 USDT</div></div>
+        <div class="proof-item"><div class="proof-user">@User_782</div><div class="proof-amt">$2.50 FPay</div></div>
+    </div>
+
+    <div class="footer-note">
+        🔒 All listed bots are verified for payments.<br>
+        Reward Software Official App
+    </div>
+
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.expand();
+
+        const apps = [
+            { id: 1, name: "Adsgptpro", bot: "Adsgptpro_bot", cat: "Ads", desc: "Main Earning Bot", img: "https://placehold.co/60/6C5CE7/white?text=A1", tags: ["hot", "paying"], verified: true },
+            { id: 2, name: "Adsgptpro 2", bot: "Adsgptpro2_bot", cat: "Ads", desc: "Official Server 2", img: "https://placehold.co/60/6C5CE7/white?text=A2", tags: ["paying"], verified: true },
+            { id: 3, name: "Ads Reward pro", bot: "Adsrewardpro_bot", cat: "Premium", desc: "High Reward Bot", img: "https://placehold.co/60/6C5CE7/white?text=AR", tags: ["hot"], verified: true }
+        ];
+
+        function renderFeatured() {
+            const featuredContainer = document.getElementById('featuredGrid');
+            apps.filter(a => a.tags.includes('hot')).forEach(app => {
+                const el = document.createElement('div');
+                el.className = 'feat-card';
+                el.onclick = () => openBot(app.bot);
+                el.innerHTML = `<img src="${app.img}" class="feat-icon"><div><div style="font-weight:700; font-size:14px;">${app.name}</div><div style="font-size:11px; color:#666;">🔥 Live Now</div></div>`;
+                featuredContainer.appendChild(el);
+            });
+        }
+
+        function renderMain(data) {
+            const mainGrid = document.getElementById('mainGrid');
+            mainGrid.innerHTML = '';
+            data.forEach((app, index) => {
+                const el = document.createElement('div');
+                el.className = 'app-item animate-in';
+                el.style.animationDelay = `${index * 0.05}s`;
+                el.innerHTML = `
+                    <div class="app-top">
+                        <img src="${app.img}" class="app-img">
+                        <div class="app-details">
+                            <div class="app-title">${app.name} <i class="ph-fill ph-seal-check" style="color:#3498db; font-size:14px"></i></div>
+                            <div class="app-sub">${app.desc}</div>
+                        </div>
+                    </div>
+                    <button class="start-earn-btn" onclick="openBot('${app.bot}')">
+                        <i class="ph-bold ph-play"></i> START EARN
+                    </button>
+                `;
+                mainGrid.appendChild(el);
+            });
+        }
+
+        function openBot(botUsername) {
+            tg.HapticFeedback.impactOccurred('medium');
+            tg.openTelegramLink(`https://t.me/${botUsername}`);
+        }
+
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const val = e.target.value.toLowerCase();
+            renderMain(apps.filter(app => app.name.toLowerCase().includes(val)));
+        });
+
+        renderFeatured();
+        renderMain(apps);
+    </script>
+</body>
+</html>
