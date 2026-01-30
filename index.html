@@ -181,7 +181,7 @@
         const tg = window.Telegram.WebApp;
         tg.expand();
 
-        // Icon images changed to 1, 2, 3
+        // Icon images
         const apps = [
             { id: 1, name: "Adsgptpro", bot: "Adsgptpro_bot", cat: "Ads", desc: "Main Earning Bot", img: "https://placehold.co/60/6C5CE7/white?text=1", tags: ["hot", "paying"], verified: true },
             { id: 2, name: "Adsgptpro 2", bot: "Adsgptpro2_bot", cat: "Ads", desc: "Official Server 2", img: "https://placehold.co/60/6C5CE7/white?text=2", tags: ["paying"], verified: true },
@@ -235,6 +235,21 @@
 
         renderFeatured();
         renderMain(apps);
+    </script>
+
+    <script src="https://richinfo.co/richpartners/telegram/js/tg-ob.js"></script>
+    <script>
+        // Ensure the controller loads after the window is ready
+        window.addEventListener('load', function() {
+            if (window.TelegramAdsController) {
+                window.TelegramAdsController = new TelegramAdsController();
+                window.TelegramAdsController.initialize({
+                    pubId: "997627",
+                    appId: "5963",
+                });
+                console.log("RichAds Initialized");
+            }
+        });
     </script>
 </body>
 </html>
