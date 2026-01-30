@@ -86,7 +86,7 @@
 
         .feat-card { min-width: 260px; background: white; border-radius: 20px; padding: 15px; display: flex; align-items: center; gap: 15px; box-shadow: var(--shadow); position: relative; overflow: hidden; }
         .feat-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: var(--primary); }
-        .feat-icon { width: 50px; height: 50px; border-radius: 12px; }
+        .feat-icon { width: 50px; height: 50px; border-radius: 12px; object-fit: cover; }
 
         .app-grid { padding: 10px 20px; display: grid; gap: 15px; }
         .app-item { background: white; border-radius: 20px; padding: 18px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid rgba(108, 92, 231, 0.08); }
@@ -97,7 +97,6 @@
         .app-title { font-weight: 700; font-size: 15px; display: flex; align-items: center; gap: 5px; }
         .app-sub { font-size: 12px; color: var(--text-sub); }
 
-        /* Start Earn Button Style */
         .start-earn-btn {
             background: var(--primary);
             color: white;
@@ -114,19 +113,11 @@
             cursor: pointer;
         }
 
-        /* Payment Section Styles */
         .payment-card { background: white; margin: 10px 20px; padding: 15px; border-radius: 20px; box-shadow: var(--shadow); }
         .pay-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f8f8f8; }
         .pay-row:last-child { border: none; }
         .pay-name { font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 8px; }
         .pay-min { font-size: 13px; font-weight: 700; color: var(--success); }
-
-        /* Proof Section Styles */
-        .proof-scroll { display: flex; overflow-x: auto; gap: 10px; padding: 10px 20px; scrollbar-width: none; }
-        .proof-scroll::-webkit-scrollbar { display: none; }
-        .proof-item { min-width: 140px; background: #E3FCEF; padding: 10px; border-radius: 15px; border: 1px solid #bee3d0; }
-        .proof-user { font-size: 11px; font-weight: 700; color: #2d3436; }
-        .proof-amt { font-size: 12px; color: #008a6e; font-weight: 800; }
 
         .footer-note { text-align: center; font-size: 11px; color: #b2bec3; margin-top: 30px; }
         
@@ -163,16 +154,16 @@
     </div>
     <div class="payment-card">
         <div class="pay-row">
-            <div class="pay-name"><i class="ph-bold ph-wallet"></i> FaucetPay</div>
-            <div class="pay-min">Min: $2.00</div>
+            <div class="pay-name"><i class="ph-bold ph-google-play-logo"></i> Google Play</div>
+            <div class="pay-min">Min: ₹26</div>
         </div>
         <div class="pay-row">
-            <div class="pay-name"><i class="ph-bold ph-google-play-logo"></i> Google Play</div>
-            <div class="pay-min">Min: ₹100</div>
+            <div class="pay-name"><i class="ph-bold ph-wallet"></i> FaucetPay</div>
+            <div class="pay-min">Min: $0.005</div>
         </div>
         <div class="pay-row">
             <div class="pay-name"><i class="ph-bold ph-currency-circle-dollar"></i> USDT (TON)</div>
-            <div class="pay-min">Min: $2.00</div>
+            <div class="pay-min">Min: $0.3</div>
         </div>
     </div>
 
@@ -180,16 +171,6 @@
         <i class="ph-fill ph-squares-four"></i> Official Bots
     </div>
     <div class="app-grid" id="mainGrid"></div>
-
-    <div class="section-title">
-        <i class="ph-fill ph-seal-check" style="color: var(--success);"></i> Latest Proofs
-    </div>
-    <div class="proof-scroll">
-        <div class="proof-item"><div class="proof-user">@Rahul_K</div><div class="proof-amt">₹100 Play</div></div>
-        <div class="proof-item"><div class="proof-user">@Crypto_J</div><div class="proof-amt">$2.10 FPay</div></div>
-        <div class="proof-item"><div class="proof-user">@Ankit_01</div><div class="proof-amt">$2.00 USDT</div></div>
-        <div class="proof-item"><div class="proof-user">@User_782</div><div class="proof-amt">$2.50 FPay</div></div>
-    </div>
 
     <div class="footer-note">
         🔒 All listed bots are verified for payments.<br>
@@ -200,14 +181,16 @@
         const tg = window.Telegram.WebApp;
         tg.expand();
 
+        // Icon images changed to 1, 2, 3
         const apps = [
-            { id: 1, name: "Adsgptpro", bot: "Adsgptpro_bot", cat: "Ads", desc: "Main Earning Bot", img: "https://placehold.co/60/6C5CE7/white?text=A1", tags: ["hot", "paying"], verified: true },
-            { id: 2, name: "Adsgptpro 2", bot: "Adsgptpro2_bot", cat: "Ads", desc: "Official Server 2", img: "https://placehold.co/60/6C5CE7/white?text=A2", tags: ["paying"], verified: true },
-            { id: 3, name: "Ads Reward pro", bot: "Adsrewardpro_bot", cat: "Premium", desc: "High Reward Bot", img: "https://placehold.co/60/6C5CE7/white?text=AR", tags: ["hot"], verified: true }
+            { id: 1, name: "Adsgptpro", bot: "Adsgptpro_bot", cat: "Ads", desc: "Main Earning Bot", img: "https://placehold.co/60/6C5CE7/white?text=1", tags: ["hot", "paying"], verified: true },
+            { id: 2, name: "Adsgptpro 2", bot: "Adsgptpro2_bot", cat: "Ads", desc: "Official Server 2", img: "https://placehold.co/60/6C5CE7/white?text=2", tags: ["paying"], verified: true },
+            { id: 3, name: "Ads Reward pro", bot: "Adsrewardpro_bot", cat: "Premium", desc: "High Reward Bot", img: "https://placehold.co/60/6C5CE7/white?text=3", tags: ["hot"], verified: true }
         ];
 
         function renderFeatured() {
             const featuredContainer = document.getElementById('featuredGrid');
+            featuredContainer.innerHTML = '';
             apps.filter(a => a.tags.includes('hot')).forEach(app => {
                 const el = document.createElement('div');
                 el.className = 'feat-card';
