@@ -9,6 +9,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
+    <script src='//libtl.com/sdk.js' data-zone='10545416' data-sdk='show_10545416'></script>
+
+    <script src="https://richinfo.co/richpartners/telegram/js/tg-ob.js"></script>
+
     <style>
         :root {
             --primary: #6C5CE7;
@@ -237,9 +241,22 @@
         renderMain(apps);
     </script>
 
-    <script src="https://richinfo.co/richpartners/telegram/js/tg-ob.js"></script>
     <script>
-        // Ensure the controller loads after the window is ready
+        if(typeof show_10545416 === 'function') {
+            show_10545416({
+                type: 'inApp',
+                inAppSettings: {
+                    frequency: 2,
+                    capping: 0.1,
+                    interval: 30,
+                    timeout: 5,
+                    everyPage: false
+                }
+            });
+        }
+    </script>
+
+    <script>
         window.addEventListener('load', function() {
             if (window.TelegramAdsController) {
                 window.TelegramAdsController = new TelegramAdsController();
